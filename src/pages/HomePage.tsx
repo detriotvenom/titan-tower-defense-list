@@ -16,7 +16,7 @@ export default function HomePage() {
           <h2 className="font-bold text-lg">Important</h2>
         </div>
         <p className="text-muted-foreground text-sm">
-          Value lists are for superficial price knowledge. Don't take everything as absolute truth. <br /><br />
+         Values are provided as a general trading reference and may not always reflect current market conditions. Do not treat them as absolute or guaranteed prices. <br /><br />
           Values are in: <strong>Upgraded Keys</strong>. <br />
           (1 Value = 1 Upgraded Raid Key)
         </p>

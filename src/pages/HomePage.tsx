@@ -25,17 +25,28 @@ export default function HomePage() {
       {/* Action Buttons */}
       <div className="flex flex-col gap-4 w-full max-w-xs">
         <Link href="/database">
-          <Button className="w-full text-lg h-14" size="lg">
+          <Button 
+            className="w-full text-lg h-14 transition-all hover:scale-[1.02] hover:bg-primary/90" 
+            size="lg"
+          >
             <Database className="mr-2" /> View Value List
           </Button>
         </Link>
+        
         <a href="YOUR_GAME_LINK" target="_blank" rel="noreferrer">
-          <Button variant="outline" className="w-full text-lg h-14">
+          <Button 
+            variant="outline" 
+            className="w-full text-lg h-14 transition-all hover:scale-[1.02] hover:bg-white/10 hover:text-white"
+          >
             <Gamepad2 className="mr-2" /> Play the Game
           </Button>
         </a>
+        
         <a href="YOUR_DISCORD_LINK" target="_blank" rel="noreferrer">
-          <Button variant="outline" className="w-full text-lg h-14">
+          <Button 
+            variant="outline" 
+            className="w-full text-lg h-14 transition-all hover:scale-[1.02] hover:bg-white/10 hover:text-white"
+          >
             <MessageSquare className="mr-2" /> Join Discord
           </Button>
         </a>

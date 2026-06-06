@@ -12,7 +12,7 @@ export function ItemCard({ item }: ItemCardProps) {
   const getRarityColor = (rarity: Item["rarity"]) => {
     switch (rarity) {
       case "Shiny":
-        return "animate-rainbow text-white border-transparent";
+        return "bg-slate-200 text-slate-900 border-slate-300 font-bold shadow-[0_0_10px_rgba(255,255,255,0.5)]";
       case "Secret":
         return "bg-[#9B59B6]/10 text-[#9B59B6] border-[#9B59B6]/50";
       case "Mythic":
@@ -38,17 +38,28 @@ export function ItemCard({ item }: ItemCardProps) {
     <Card className="flex flex-col bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
       <div className="p-4 flex-1">
         
-        {/* --- FIXED IMAGE CONTAINER --- */}
-        <div className={`w-full h-36 border rounded-lg mb-4 flex items-center justify-center bg-[#121214] transition-all duration-300 p-2
+        {/* --- DYNAMIC IMAGE CONTAINER WITH SILVER SHINY SHIMMER EFFECT --- */}
+        <div className={`w-full h-36 border rounded-lg mb-4 flex items-center justify-center bg-[#121214] transition-all duration-300 p-2 relative overflow-hidden group
           ${item.rarity === "Shiny" 
-            ? "animate-rainbow border-transparent shadow-[0_0_15px_rgba(168,85,247,0.35)]" 
+            ? "border-slate-200/60 shadow-[0_0_20px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#1e293b] to-[#0f172a]" 
             : "border-card-border/50"
           }`}
         >
+          {/* Silver Shine Reflection Overlay */}
+          {item.rarity === "Shiny" && (
+            <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+              {/* Static light glare edges */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/5 to-white/10 mix-blend-overlay" />
+              
+              {/* Sliding shine animation when hovering over the card */}
+              <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-all duration-1000 ease-out group-hover:left-[200%]" />
+            </div>
+          )}
+
           <img 
             src={item.image} 
             alt={item.name} 
-            className="w-auto h-full max-w-full object-contain transition-transform duration-300 hover:scale-105"
+            className="w-auto h-full max-w-full object-contain transition-transform duration-300 hover:scale-105 relative z-0"
             loading="lazy"
           />
         </div>

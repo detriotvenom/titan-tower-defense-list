@@ -17,7 +17,7 @@ export default function HomePage() {
         </div>
         <p className="text-muted-foreground text-sm">
           Value lists are for superficial price knowledge. Don't take everything as absolute truth. <br /><br />
-          Values are in: <strong>Upgraded Keys / Gold Bars / Titans 1.0</strong>. <br />
+          Values are in: <strong>Upgraded Keys</strong>. <br />
           (1 Value = 1 Upgraded Raid Key)
         </p>
       </div>

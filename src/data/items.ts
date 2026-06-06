@@ -252,5 +252,5 @@ export const items = [
   { name: "Samurai Plating", rarity: "Item", value: "0.07", uttv: "0.00", demand: 3.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Charged Battery", rarity: "Item", value: "0.05", uttv: "0.00", demand: 7.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Fuel Cell", rarity: "Item", value: "0.03", uttv: "0.00", demand: 3.0, stability: "Stable", image: "https://placehold.co/150" },
-  { name: "Zombie Tooth", rarity: "Item", value: "0.01", uttv: "0.00", demand: 1.0, stability: "Stable", image: "https://placehold.co/150" },
+  { name: "Zombie Tooth", rarity: "Item", value: "0.01", uttv: "0.00", demand: 1.0, stability: "Stable", image: "https://placehold.co/150" }
 ] as const;

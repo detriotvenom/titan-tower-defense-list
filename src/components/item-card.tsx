@@ -1,0 +1,86 @@
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { TrendingDown, TrendingUp } from "lucide-react";
+import type { Item } from "@/lib/items-store";
+
+interface ItemCardProps {
+  item: Item;
+}
+
+export function ItemCard({ item }: ItemCardProps) {
+  const getRarityColor = (rarity: Item["rarity"]) => {
+    switch (rarity) {
+      case "Shiny":
+        return "animate-rainbow text-white border-transparent";
+      case "Secret":
+        return "bg-[#9B59B6]/10 text-[#9B59B6] border-[#9B59B6]/50";
+      case "Mythic":
+        return "bg-[#E74C3C]/10 text-[#E74C3C] border-[#E74C3C]/50";
+      case "Legendary":
+        return "bg-[#F1C40F]/10 text-[#F1C40F] border-[#F1C40F]/50";
+      case "Epic":
+        return "bg-[#6C3483]/10 text-[#6C3483] border-[#6C3483]/50";
+      case "Item":
+        return "bg-[#95A5A6]/10 text-[#95A5A6] border-[#95A5A6]/50";
+      default:
+        return "bg-secondary text-secondary-foreground";
+    }
+  };
+
+  const getDemandColor = (demand: number) => {
+    if (demand >= 8) return "text-green-400";
+    if (demand >= 5) return "text-yellow-400";
+    return "text-red-400";
+  };
+
+  return (
+    <Card className="flex flex-col bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+      <div className="p-4 flex-1">
+        <div className="flex justify-between items-start mb-4 gap-2">
+          <h3 className="font-bold text-lg text-foreground leading-tight">{item.name}</h3>
+          <Badge variant="outline" className={`whitespace-nowrap ${getRarityColor(item.rarity)}`}>
+            {item.rarity}
+          </Badge>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Value</div>
+            <div className="text-2xl font-black text-primary drop-shadow-md">
+              {item.value}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">UTTV</div>
+              <div className="font-semibold text-foreground/90">{item.uttv}</div>
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Demand</div>
+              <div className={`font-semibold ${getDemandColor(item.demand)}`}>{item.demand.toFixed(1)} / 10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="px-4 py-3 bg-black/20 border-t border-card-border flex items-center justify-between">
+        <span className="text-xs text-muted-foreground uppercase tracking-wider">Trend</span>
+        <div className="flex items-center gap-1.5">
+          {item.stability === "Stable" ? (
+            <>
+              <TrendingUp className="w-4 h-4 text-green-400" />
+              <span className="text-sm font-medium text-green-400">Stable</span>
+            </>
+          ) : (
+            <>
+              <TrendingDown className="w-4 h-4 text-red-400" />
+              <span className="text-sm font-medium text-red-400">Dropping</span>
+            </>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
+}

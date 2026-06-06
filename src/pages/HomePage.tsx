@@ -17,7 +17,7 @@ export default function HomePage() {
         </div>
         <p className="text-muted-foreground text-sm">
          Values are provided as a general trading reference and may not always reflect current market conditions. Do not treat them as absolute or guaranteed prices. <br /><br />
-          Values are in: <strong>Upgraded Keys</strong>. <br />
+          Values are in: <strong>Upgraded Raid Keys</strong>. <br />
           (1 Value = 1 Upgraded Raid Key)
         </p>
       </div>
@@ -33,7 +33,7 @@ export default function HomePage() {
           </Button>
         </Link>
         
-        <a href="YOUR_GAME_LINK" target="_blank" rel="noreferrer">
+        <a href="https://www.roblox.com/games/14641667067/Titan-Tower-Defense" target="_blank" rel="noreferrer">
           <Button 
             variant="outline" 
             className="w-full text-lg h-14 transition-all hover:scale-[1.02] hover:bg-white/10 hover:text-white"
@@ -42,7 +42,7 @@ export default function HomePage() {
           </Button>
         </a>
         
-        <a href="YOUR_DISCORD_LINK" target="_blank" rel="noreferrer">
+        <a href="https://discord.gg/titantd" target="_blank" rel="noreferrer">
           <Button 
             variant="outline" 
             className="w-full text-lg h-14 transition-all hover:scale-[1.02] hover:bg-white/10 hover:text-white"

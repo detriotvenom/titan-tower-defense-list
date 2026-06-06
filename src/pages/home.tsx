@@ -22,18 +22,20 @@ export default function Home() {
       result = result.filter(item => item.name.toLowerCase().includes(lowerSearch));
     }
 
-    // Filter by Rarity
+    // Filter by Rarity (UPDATED LOGIC)
     if (rarityFilter !== "All") {
-      result = result.filter(item => item.rarity === rarityFilter);
+      if (rarityFilter === "Shiny") {
+        result = result.filter(item => item.rarity.startsWith("Shiny"));
+      } else {
+        result = result.filter(item => item.rarity.includes(rarityFilter));
+      }
     }
 
     // Sort by Value
     result.sort((a, b) => {
-      // Extract the first number if it's a range
       const getVal = (valStr: string) => parseFloat(valStr.split('-')[0].trim().replace(/,/g, ''));
       const valA = getVal(a.value);
       const valB = getVal(b.value);
-
       return sortOrder === "desc" ? valB - valA : valA - valB;
     });
 

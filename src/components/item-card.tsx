@@ -38,22 +38,19 @@ export function ItemCard({ item }: ItemCardProps) {
     <Card className="flex flex-col bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
       <div className="p-4 flex-1">
         
-        {/* --- DYNAMIC IMAGE CONTAINER WITH SHINY RAINBOW EFFECT --- */}
-        <div className={`w-full h-36 border rounded-lg overflow-hidden mb-4 flex items-center justify-center transition-all duration-300
+        {/* --- FIXED IMAGE CONTAINER --- */}
+        <div className={`w-full h-36 border rounded-lg mb-4 flex items-center justify-center bg-[#121214] transition-all duration-300 p-2
           ${item.rarity === "Shiny" 
-            ? "animate-rainbow p-[2px] border-transparent shadow-[0_0_15px_rgba(168,85,247,0.35)]" 
-            : "bg-muted/30 border-card-border/50"
+            ? "animate-rainbow border-transparent shadow-[0_0_15px_rgba(168,85,247,0.35)]" 
+            : "border-card-border/50"
           }`}
         >
-          {/* Inner card layer to hold the image clean inside the rainbow frame */}
-          <div className="w-full h-full bg-[#121214] rounded-[6px] overflow-hidden flex items-center justify-center p-1">
-            <img 
-              src={item.image} 
-              alt={item.name} 
-              className="max-w-full max-h-full object-contain transition-transform duration-300 hover:scale-105"
-              loading="lazy"
-            />
-          </div>
+          <img 
+            src={item.image} 
+            alt={item.name} 
+            className="w-auto h-full max-w-full object-contain transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+          />
         </div>
 
         <div className="flex justify-between items-start mb-4 gap-2">
@@ -79,3 +76,27 @@ export function ItemCard({ item }: ItemCardProps) {
             <div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Demand</div>
               <div className={`font-semibold ${getDemandColor(item.demand)}`}>{item.demand.toFixed(1)} / 10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="px-4 py-3 bg-black/20 border-t border-card-border flex items-center justify-between">
+        <span className="text-xs text-muted-foreground uppercase tracking-wider">Trend</span>
+        <div className="flex items-center gap-1.5">
+          {item.stability === "Stable" ? (
+            <>
+              <TrendingUp className="w-4 h-4 text-green-400" />
+              <span className="text-sm font-medium text-green-400">Stable</span>
+            </>
+          ) : (
+            <>
+              <TrendingDown className="w-4 h-4 text-red-400" />
+              <span className="text-sm font-medium text-red-400">Dropping</span>
+            </>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
+}

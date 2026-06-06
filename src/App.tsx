@@ -3,7 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
-import Home from "@/pages/home";
+import HomePage from "@/pages/HomePage"; // Import your new landing page
+import Home from "@/pages/home";         // This is your list
 import Admin from "@/pages/admin";
 import { ThemeProvider } from "next-themes";
 
@@ -12,7 +13,10 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      {/* 1. Root path now points to HomePage */}
+      <Route path="/" component={HomePage} />
+      {/* 2. Database path points to your item list */}
+      <Route path="/database" component={Home} />
       <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>

@@ -37,6 +37,17 @@ export function ItemCard({ item }: ItemCardProps) {
   return (
     <Card className="flex flex-col bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
       <div className="p-4 flex-1">
+        
+        {/* --- IMAGE CONTAINER --- */}
+        <div className="w-full h-36 bg-muted/30 border border-card-border/50 rounded-lg overflow-hidden mb-4 flex items-center justify-center">
+          <img 
+            src={item.image} 
+            alt={item.name} 
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+
         <div className="flex justify-between items-start mb-4 gap-2">
           <h3 className="font-bold text-lg text-foreground leading-tight">{item.name}</h3>
           <Badge variant="outline" className={`whitespace-nowrap ${getRarityColor(item.rarity)}`}>

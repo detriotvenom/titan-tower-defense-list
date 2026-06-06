@@ -38,14 +38,22 @@ export function ItemCard({ item }: ItemCardProps) {
     <Card className="flex flex-col bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
       <div className="p-4 flex-1">
         
-        {/* --- IMAGE CONTAINER --- */}
-        <div className="w-full h-36 bg-muted/30 border border-card-border/50 rounded-lg overflow-hidden mb-4 flex items-center justify-center">
-          <img 
-            src={item.image} 
-            alt={item.name} 
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-            loading="lazy"
-          />
+        {/* --- DYNAMIC IMAGE CONTAINER WITH SHINY RAINBOW EFFECT --- */}
+        <div className={`w-full h-36 border rounded-lg overflow-hidden mb-4 flex items-center justify-center transition-all duration-300
+          ${item.rarity === "Shiny" 
+            ? "animate-rainbow p-[2px] border-transparent shadow-[0_0_15px_rgba(168,85,247,0.35)]" 
+            : "bg-muted/30 border-card-border/50"
+          }`}
+        >
+          {/* Inner card layer to hold the image clean inside the rainbow frame */}
+          <div className="w-full h-full bg-[#121214] rounded-[6px] overflow-hidden flex items-center justify-center">
+            <img 
+              src={item.image} 
+              alt={item.name} 
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
         </div>
 
         <div className="flex justify-between items-start mb-4 gap-2">

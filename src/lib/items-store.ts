@@ -2,14 +2,17 @@ import { items as defaultItems } from "@/data/items";
 
 export type Rarity = "Shiny" | "Secret" | "Mythic" | "Legendary" | "Epic" | "Item";
 export type Stability = "Stable" | "Dropping";
+export type Category = "Unit" | "Item"; // 🎯 Added this to handle the sub-category types
 
 export interface Item {
   name: string;
   rarity: Rarity;
+  category?: string; // 🎯 Added this line with a '?' so old cards won't break if they don't have it yet!
   value: string;
   uttv: string;
   demand: number;
   stability: Stability;
+  image: string; // Ensuring image is officially recognized here too
 }
 
 const STORAGE_KEY = "ttd-items-v1";

@@ -40,13 +40,13 @@ export function ItemCard({ item }: ItemCardProps) {
         
         {/* --- DYNAMIC IMAGE CONTAINER WITH SILVER SHINY SHIMMER EFFECT --- */}
         <div className={`w-full h-36 border rounded-lg mb-4 flex items-center justify-center bg-[#121214] transition-all duration-300 p-2 relative overflow-hidden group
-          ${item.rarity === "Shiny" 
+          ${item.rarity.includes("Shiny") 
             ? "border-slate-200/60 shadow-[0_0_20px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#1e293b] to-[#0f172a]" 
             : "border-card-border/50"
           }`}
         >
           {/* Silver Shine Reflection Overlay */}
-          {item.rarity === "Shiny" && (
+          {item.rarity.includes("Shiny") && (
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
               {/* Static light glare edges */}
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/5 to-white/10 mix-blend-overlay" />

@@ -16,8 +16,9 @@ export default function HomePage() {
           <h2 className="font-bold text-lg">Important</h2>
         </div>
         <p className="text-muted-foreground text-sm">
-          Value lists are for superficial price knowledge. Don't take everything as absolute truth. 
-          Values are in: <strong>Upgraded Keys / Gold Bars / Titans 1.0</strong> (1 Value = 1 Upgraded Raid Key).
+          Value lists are for superficial price knowledge. Don't take everything as absolute truth. <br /><br />
+          Values are in: <strong>Upgraded Keys / Gold Bars / Titans 1.0</strong>. <br />
+          (1 Value = 1 Upgraded Raid Key)
         </p>
       </div>
 
@@ -28,16 +29,22 @@ export default function HomePage() {
             <Database className="mr-2" /> View Value List
           </Button>
         </Link>
-        <a href="YOUR_GAME_LINK" target="_blank">
+        <a href="YOUR_GAME_LINK" target="_blank" rel="noreferrer">
           <Button variant="outline" className="w-full text-lg h-14">
             <Gamepad2 className="mr-2" /> Play the Game
           </Button>
         </a>
-        <a href="YOUR_DISCORD_LINK" target="_blank">
+        <a href="YOUR_DISCORD_LINK" target="_blank" rel="noreferrer">
           <Button variant="outline" className="w-full text-lg h-14">
             <MessageSquare className="mr-2" /> Join Discord
           </Button>
         </a>
+      </div>
+
+      {/* Last Updated Footer */}
+      <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+        <span>Last updated: June 7, 2026</span>
       </div>
     </div>
   );

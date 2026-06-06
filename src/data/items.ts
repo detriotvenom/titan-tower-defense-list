@@ -1,5 +1,5 @@
 export const items = [
-  { name: "Shiny Slotman (highroller)", rarity: "Shiny", value: "12150.00", uttv: "135.00", demand: 3.0, stability: "Stable", image: "https://ibb.co/7dGM07bL" },
+  { name: "Shiny Slotman (highroller)", rarity: "Shiny", value: "12150.00", uttv: "135.00", demand: 3.0, stability: "Stable", image: "https://i.ibb.co/6RbyVks/image.png" },
   { name: "Shiny Clock Woman (future)", rarity: "Shiny", value: "8100.00", uttv: "90.00", demand: 4.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Shiny Titan Grill (full gas)", rarity: "Shiny", value: "6300.00", uttv: "70.00", demand: 6.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Slotman (highroller)", rarity: "Secret", value: "5400.00", uttv: "60.00", demand: 4.0, stability: "Stable", image: "https://placehold.co/150" },

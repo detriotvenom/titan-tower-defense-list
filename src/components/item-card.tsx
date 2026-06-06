@@ -46,11 +46,11 @@ export function ItemCard({ item }: ItemCardProps) {
           }`}
         >
           {/* Inner card layer to hold the image clean inside the rainbow frame */}
-          <div className="w-full h-full bg-[#121214] rounded-[6px] overflow-hidden flex items-center justify-center">
+          <div className="w-full h-full bg-[#121214] rounded-[6px] overflow-hidden flex items-center justify-center p-1">
             <img 
               src={item.image} 
               alt={item.name} 
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              className="max-w-full max-h-full object-contain transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
@@ -79,27 +79,3 @@ export function ItemCard({ item }: ItemCardProps) {
             <div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Demand</div>
               <div className={`font-semibold ${getDemandColor(item.demand)}`}>{item.demand.toFixed(1)} / 10</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="px-4 py-3 bg-black/20 border-t border-card-border flex items-center justify-between">
-        <span className="text-xs text-muted-foreground uppercase tracking-wider">Trend</span>
-        <div className="flex items-center gap-1.5">
-          {item.stability === "Stable" ? (
-            <>
-              <TrendingUp className="w-4 h-4 text-green-400" />
-              <span className="text-sm font-medium text-green-400">Stable</span>
-            </>
-          ) : (
-            <>
-              <TrendingDown className="w-4 h-4 text-red-400" />
-              <span className="text-sm font-medium text-red-400">Dropping</span>
-            </>
-          )}
-        </div>
-      </div>
-    </Card>
-  );
-}

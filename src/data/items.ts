@@ -7,7 +7,7 @@ export const items = [
   { name: "Shiny Zombie Titan TV (enraged)", category: "Unit", rarity: "Shiny", value: "4500.00", uttv: "50.00", demand: 6.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Clock Woman (future)", category: "Unit", rarity: "Secret", value: "3420.00", uttv: "38.00", demand: 5.0, stability: "Stable", image: "https://i.ibb.co/jkzdN54R/image.png" },
   { name: "Shiny Slotman", category: "Unit", rarity: "Shiny", value: "3600.00", uttv: "40.00", demand: 2.0, stability: "Stable", image: "https://i.ibb.co/WWyhRkKd/image.png" },
-  { name: "Doom Blade", category: "Item", rarity: "Item", value: "3240.00", uttv: "36.00", demand: 7.0, stability: "Stable", image: "https://i.ibb.co/spSbFpKP/image.png" },
+  { name: "Doom Blade", category: "Item", rarity: "Secret", value: "3240.00", uttv: "36.00", demand: 7.0, stability: "Stable", image: "https://i.ibb.co/spSbFpKP/image.png" },
   { name: "Slotman", category: "Unit", rarity: "Secret", value: "3150.00", uttv: "35.00", demand: 3.0, stability: "Stable", image: "https://i.ibb.co/WWyhRkKd/image.png" },
   { name: "Titan Grill", category: "Unit", rarity: "Secret", value: "2970.00", uttv: "33.00", demand: 2.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Shiny Titan Grill", category: "Unit", rarity: "Shiny", value: "2970.00", uttv: "33.00", demand: 2.0, stability: "Stable", image: "https://placehold.co/150" },

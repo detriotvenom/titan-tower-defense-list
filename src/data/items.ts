@@ -1,4 +1,16 @@
-export const items = [
+export interface Item {
+  name: string;
+  category: string;
+  rarity: string;
+  isShiny: boolean;
+  value: string;
+  uttv: string;
+  demand: number;
+  stability: string;
+  image: string;
+}
+
+export const items: Item[] = [
   { name: "Shiny Slotman (Highroller)", category: "Unit", rarity: "Secret", isShiny: true, value: "9900.00", uttv: "110.00", demand: 1.0, stability: "Stable", image: "https://i.ibb.co/9kqKdRGS/image.png" },
   { name: "Shiny Clock Woman (Future)", category: "Unit", rarity: "Secret", isShiny: true, value: "7200.00", uttv: "80.00", demand: 2.0, stability: "Stable", image: "https://i.ibb.co/jkzdN54R/image.png" },
   { name: "Shiny Titan Grill (Full Gas)", category: "Unit", rarity: "Secret", isShiny: true, value: "6300.00", uttv: "70.00", demand: 5.0, stability: "Stable", image: "https://i.ibb.co/H9rTnGM/image.png" },
@@ -253,4 +265,4 @@ export const items = [
   { name: "Charged Battery", category: "Item", rarity: "Item", isShiny: false, value: "0.05", uttv: "0.00", demand: 7.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Fuel Cell", category: "Item", rarity: "Item", isShiny: false, value: "0.03", uttv: "0.00", demand: 3.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Zombie Tooth", category: "Item", rarity: "Item", isShiny: false, value: "0.01", uttv: "0.00", demand: 1.0, stability: "Stable", image: "https://placehold.co/150" }
-  ] as const;
+];

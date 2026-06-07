@@ -1,5 +1,4 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import type { Item } from "@/lib/items-store";
 
@@ -10,58 +9,47 @@ interface ItemCardProps {
 export function ItemCard({ item }: ItemCardProps) {
   const isShiny = item.isShiny;
 
-  // Simple, clean rarity colors
-  const rarityColors: Record<string, string> = {
-    secret: "bg-purple-900/50",
-    mythic: "bg-rose-900/50",
-    legendary: "bg-amber-900/50",
-  };
-
-  const barColor = rarityColors[item.rarity.toLowerCase()] || "bg-slate-800/50";
-
   return (
     <div className="w-[260px] transition-all hover:scale-[1.02]">
-      <Card className="h-full bg-slate-900/80 border border-slate-700 shadow-xl overflow-hidden">
+      <Card className="h-full bg-[#2a2a2a] border border-slate-700 shadow-xl overflow-hidden flex flex-col">
         
-        {/* Animated Header */}
+        {/* Animated Header Bar */}
         <div 
-          className={`h-1.5 w-full ${!isShiny ? barColor : ""}`}
-          style={isShiny ? {
-            background: 'linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee, #ff0000)',
-            backgroundSize: '200% 100%',
-            animation: 'rainbow-move 3s linear infinite'
-          } : {}}
+          className={`h-1.5 w-full ${isShiny ? "bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500 animate-rainbow" : "bg-slate-700"}`}
         />
 
-        {/* Tightened Image Area */}
-        <div className="p-4 flex items-center justify-center h-32">
+        {/* Image Area */}
+        <div className="p-4 flex items-center justify-center">
           <div className="border border-slate-700/50 rounded-xl p-2 bg-slate-950/40 shadow-inner">
-            <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
+            <img src={item.image} alt={item.name} className="w-20 h-20 object-contain" />
           </div>
         </div>
 
-        {/* Compact Info Section */}
-        <div className="px-4 pb-4">
-          <h3 className="font-bold text-slate-100 text-sm mb-2 truncate">{item.name}</h3>
-          
-          <div className="flex items-end justify-between border-t border-slate-800 pt-2">
-            <Badge className="bg-slate-800 border-none text-[9px] uppercase font-bold text-slate-400">
-              {isShiny ? "Shiny " + item.rarity : item.rarity}
-            </Badge>
-            
-            <div className="flex flex-col items-end gap-0.5">
-              <div className="flex items-center gap-2">
-                <span className="text-[8px] text-slate-500 font-black uppercase">Val</span>
-                <span className="text-xs font-bold text-white font-mono">{item.value}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[8px] text-slate-500 font-black uppercase">UTTV</span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">{item.uttv}</span>
-              </div>
-            </div>
+        {/* Info Section */}
+        <div className="px-4 pb-4 space-y-3">
+          <h3 className="font-bold text-white text-center text-sm truncate">{item.name}</h3>
+
+          {/* Stats Grid */}
+          <div className="space-y-1.5">
+            <StatRow label="Value" value={item.value} />
+            <StatRow label="UTTV" value={item.uttv} color="text-emerald-400" />
+            <StatRow label="Demand" value={`${item.demand} /10`} />
+            <StatRow 
+              label="Stability" 
+              value={item.stability} 
+              color={item.stability === "Dropping" ? "text-red-400" : "text-green-400"} 
+            />
           </div>
         </div>
       </Card>
     </div>
   );
 }
+
+// Reusable Stat Row Component with Text Outline
+const StatRow = ({ label, value, color = "text-white" }: { label: string, value: string, color?: string }) => (
+  <div className="bg-[#3a3a3a] border border-gray-600 rounded-md py-1 px-3 flex justify-between items-center text-[10px]">
+    <span className="text-gray-400 font-bold uppercase tracking-wider">{label}:</span>
+    <span className={`${color} font-black text-outline text-xs`}>{value}</span>
+  </div>
+);

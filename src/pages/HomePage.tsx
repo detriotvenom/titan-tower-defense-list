@@ -18,7 +18,7 @@ export default function HomePage() {
               TTD <span className="text-primary">Value List</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-lg mx-auto leading-relaxed">
-              The industry-standard market intelligence tool for Titan Tower Defense.
+              Value List for Titan Tower Defense.
             </p>
           </div>
         </div>

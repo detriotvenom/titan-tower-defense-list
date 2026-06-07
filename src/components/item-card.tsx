@@ -8,9 +8,8 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  // Define colors as a simple object to avoid logic errors
   const rarityColors: Record<string, string> = {
-    secret: "bg-purple-600",
+    secret: "bg-purple-500",
     mythic: "bg-rose-500",
     legendary: "bg-amber-500",
     epic: "bg-blue-500",
@@ -19,22 +18,41 @@ export function ItemCard({ item }: ItemCardProps) {
   const barColor = rarityColors[item.rarity.toLowerCase()] || "bg-slate-500";
 
   return (
-    <div className="w-[280px] rounded-2xl bg-card border border-border overflow-hidden shadow-lg">
-      {/* Static Rarity Bar - No complex animations to ensure it renders */}
-      <div className={`h-1.5 w-full ${barColor}`} />
+    <div className="w-[280px] group transition-all hover:scale-[1.02]">
+      <Card className="h-full bg-card/50 backdrop-blur-sm border-white/10 shadow-xl flex flex-col overflow-hidden">
+        {/* Rarity Bar */}
+        <div className={`h-1.5 w-full ${barColor}`} />
 
-      <div className="p-4 bg-black/20 flex items-center justify-center h-40">
-        <img src={item.image} alt={item.name} className="max-w-[70%] max-h-[70%] object-contain" />
-      </div>
-
-      <div className="p-4">
-        <h3 className="font-bold text-lg">{item.name}</h3>
-        <p className="text-sm text-muted-foreground">{item.rarity}</p>
-        <div className="mt-4 pt-4 border-t border-border">
-          <p className="text-xs font-bold uppercase text-muted-foreground">Value</p>
-          <p className="text-xl font-black">{item.value}</p>
+        {/* Image Section */}
+        <div className="p-6 bg-black/10 flex items-center justify-center h-40">
+          <img 
+            src={item.image} 
+            alt={item.name} 
+            className="max-w-[80%] max-h-[80%] object-contain drop-shadow-2xl" 
+          />
         </div>
-      </div>
+
+        {/* Content Section */}
+        <div className="p-5 flex flex-col gap-2">
+          <div className="flex justify-between items-start">
+            <h3 className="font-bold text-lg leading-snug text-white">{item.name}</h3>
+            <Badge className="bg-white/10 hover:bg-white/20 text-[10px] uppercase tracking-wider text-white/70 border-none">
+              {item.rarity}
+            </Badge>
+          </div>
+          
+          <div className="mt-2 grid grid-cols-2 gap-2 border-t border-white/5 pt-4">
+            <div>
+              <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest">Value</p>
+              <p className="text-lg font-black text-white">{item.value}</p>
+            </div>
+            <div>
+              <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest">Demand</p>
+              <p className="text-lg font-bold text-white">{item.demand}/10</p>
+            </div>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

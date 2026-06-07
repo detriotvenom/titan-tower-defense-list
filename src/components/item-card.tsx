@@ -35,7 +35,6 @@ export function ItemCard({ item }: ItemCardProps) {
   };
 
   return (
-    // Added max-w-[280px] and mx-auto to keep cards compact and centered
     <Card className="flex flex-col w-full max-w-[280px] mx-auto bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
       <div className="p-4 flex-1">
         
@@ -62,9 +61,12 @@ export function ItemCard({ item }: ItemCardProps) {
           />
         </div>
 
-        <div className="flex justify-between items-start mb-4 gap-2">
-          <h3 className="font-bold text-lg text-foreground leading-tight truncate">{item.name}</h3>
-          <Badge variant="outline" className={`whitespace-nowrap ${getRarityColor(item.rarity)}`}>
+        {/* --- STACKED HEADER: NAME THEN RARITY --- */}
+        <div className="flex flex-col items-start mb-4 gap-2 w-full">
+          <h3 className="font-bold text-lg text-foreground leading-tight w-full">
+            {item.name}
+          </h3>
+          <Badge variant="outline" className={`w-fit ${getRarityColor(item.rarity)}`}>
             {item.rarity}
           </Badge>
         </div>

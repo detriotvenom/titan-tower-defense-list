@@ -8,20 +8,24 @@ interface ItemCardProps {
   item: Item;
 }
 
-// Logic: Check for Shiny first, then check Rarity strings
+// 1. We use a mapping object for clean, high-performance styling
+const RARITY_MAP: Record<string, string> = {
+  secret: "bg-purple-600",
+  mythic: "bg-rose-500",
+  legendary: "bg-amber-500",
+  epic: "bg-blue-500",
+  item: "bg-slate-500",
+};
+
 const getRarityStyles = (item: Item) => {
+  // 2. Shiny items always get the special animation
   if (item.isShiny) {
     return "bg-gradient-to-r from-slate-700 via-slate-100 to-slate-700 bg-[length:200%_100%] animate-shine";
   }
 
-  const r = item.rarity.toLowerCase();
-  
-  if (r.includes("secret")) return "bg-purple-600";
-  if (r.includes("mythic")) return "bg-rose-500";
-  if (r.includes("legendary")) return "bg-amber-500";
-  if (r.includes("epic")) return "bg-blue-500";
-  
-  return "bg-slate-500";
+  // 3. Fallback to map, or default to slate if rarity not found
+  const rarityKey = item.rarity.toLowerCase();
+  return RARITY_MAP[rarityKey] || "bg-slate-500";
 };
 
 export function ItemCard({ item }: ItemCardProps) {
@@ -31,10 +35,9 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="group relative w-[280px] p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all hover:scale-[1.02] duration-300">
       <Card className="h-full bg-card/80 backdrop-blur-md border-none shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity/Shiny Bar */}
+        {/* Dynamic Color Bar */}
         <div className={`h-1.5 w-full ${rarityStyle}`} />
 
-        {/* Image Area */}
         <div className="relative w-full h-40 bg-black/20 flex items-center justify-center overflow-hidden">
           <img 
             src={item.image} 
@@ -43,7 +46,6 @@ export function ItemCard({ item }: ItemCardProps) {
           />
         </div>
 
-        {/* Content Area */}
         <div className="p-5 flex flex-col flex-1">
           <div className="flex justify-between items-start mb-4">
             <h3 className="font-bold text-lg text-foreground leading-tight">{item.name}</h3>
@@ -64,7 +66,6 @@ export function ItemCard({ item }: ItemCardProps) {
           </div>
         </div>
 
-        {/* Footer Data */}
         <div className="grid grid-cols-2 bg-white/[0.03] border-t border-white/5">
           <div className="px-4 py-3 border-r border-white/5">
             <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-0.5">Demand</p>

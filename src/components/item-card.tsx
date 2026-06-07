@@ -11,67 +11,64 @@ interface ItemCardProps {
 export function ItemCard({ item }: ItemCardProps) {
   const getRarityColor = (rarity: Item["rarity"]) => {
     switch (rarity) {
-      case "Shiny": return "bg-slate-200 text-slate-900 border-slate-300 font-bold shadow-[0_0_10px_rgba(255,255,255,0.5)]";
-      case "Secret": return "bg-[#9B59B6]/10 text-[#9B59B6] border-[#9B59B6]/50";
-      case "Mythic": return "bg-[#E74C3C]/10 text-[#E74C3C] border-[#E74C3C]/50";
-      case "Legendary": return "bg-[#F1C40F]/10 text-[#F1C40F] border-[#F1C40F]/50";
-      case "Epic": return "bg-[#6C3483]/10 text-[#6C3483] border-[#6C3483]/50";
-      case "Item": return "bg-[#95A5A6]/10 text-[#95A5A6] border-[#95A5A6]/50";
-      default: return "bg-secondary text-secondary-foreground";
+      case "Shiny": return "bg-slate-200 text-slate-900 border-slate-300 font-bold";
+      case "Secret": return "bg-purple-500/10 text-purple-300 border-purple-500/20";
+      case "Mythic": return "bg-red-500/10 text-red-300 border-red-500/20";
+      case "Legendary": return "bg-amber-500/10 text-amber-300 border-amber-500/20";
+      case "Epic": return "bg-blue-500/10 text-blue-300 border-blue-500/20";
+      default: return "bg-slate-500/10 text-slate-300 border-slate-500/20";
     }
   };
 
-  const getDemandColor = (demand: number) => {
-    if (demand >= 8) return "text-green-400";
-    if (demand >= 5) return "text-yellow-400";
-    return "text-red-400";
-  };
-
   return (
-    <Card className="flex flex-col w-[280px] bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+    <Card className="flex flex-col w-[280px] bg-card border-card-border overflow-hidden transition-all hover:border-primary/50 hover:shadow-lg">
       <div className="p-4 flex-1">
-        <div className={`w-full h-36 border rounded-lg mb-4 flex items-center justify-center bg-[#121214] transition-all duration-300 p-2 relative overflow-hidden group
-          ${item.rarity.includes("Shiny") ? "border-slate-200/60 shadow-[0_0_20px_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#1e293b] to-[#0f172a]" : "border-card-border/50"}`}
-        >
-          {item.rarity.includes("Shiny") && (
-            <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/5 to-white/10 mix-blend-overlay" />
-              <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-all duration-1000 ease-out group-hover:left-[200%]" />
-            </div>
-          )}
-          <img src={item.image} alt={item.name} className="w-auto h-full max-w-full object-contain transition-transform duration-300 hover:scale-105 relative z-0" loading="lazy" />
+        {/* Image Container */}
+        <div className="relative w-full h-40 bg-background/50 rounded-lg mb-4 flex items-center justify-center border border-border/50">
+          <img 
+            src={item.image} 
+            alt={item.name} 
+            className="max-w-[80%] max-h-[80%] object-contain transition-transform duration-300 hover:scale-110"
+            loading="lazy" 
+          />
         </div>
 
-        <div className="flex flex-col items-start mb-4 gap-2 w-full">
-          <h3 className="font-bold text-lg text-foreground leading-tight w-full">{item.name}</h3>
-          <Badge variant="outline" className={`w-fit ${getRarityColor(item.rarity)}`}>{item.rarity}</Badge>
+        {/* Title & Rarity */}
+        <div className="mb-4">
+          <h3 className="font-bold text-white text-lg mb-1 leading-snug">{item.name}</h3>
+          <Badge variant="outline" className={`border-none ${getRarityColor(item.rarity)}`}>
+            {item.rarity}
+          </Badge>
         </div>
 
-        <div className="space-y-4">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border/50">
           <div>
-            <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Value</div>
-            <div className="text-2xl font-black text-primary drop-shadow-md">{item.value}</div>
+            <div className="text-[10px] text-muted-foreground uppercase tracking-widest">Value</div>
+            <div className="text-xl font-extrabold text-white">{item.value}</div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">UTTV</div>
-              <div className="font-semibold text-foreground/90">{item.uttv}</div>
-            </div>
-            <div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Demand</div>
-              <div className={`font-semibold ${getDemandColor(item.demand)}`}>{item.demand.toFixed(1)} / 10</div>
-            </div>
+          <div>
+            <div className="text-[10px] text-muted-foreground uppercase tracking-widest">UTTV</div>
+            <div className="text-lg font-semibold text-foreground">{item.uttv}</div>
           </div>
         </div>
       </div>
       
-      <div className="px-4 py-3 bg-black/20 border-t border-card-border flex items-center justify-between">
-        <span className="text-xs text-muted-foreground uppercase tracking-wider">Trend</span>
-        <div className="flex items-center gap-1.5">
+      {/* Footer Stats */}
+      <div className="px-4 py-3 bg-background/50 border-t border-border/50 flex items-center justify-between">
+        <div className="text-xs text-muted-foreground uppercase tracking-widest">Demand</div>
+        <span className={`font-bold ${item.demand >= 7 ? 'text-emerald-400' : item.demand >= 4 ? 'text-amber-400' : 'text-rose-400'}`}>
+          {item.demand.toFixed(1)}/10
+        </span>
+      </div>
+
+      <div className="px-4 py-2 flex items-center justify-between border-t border-border/50">
+        <span className="text-xs text-muted-foreground uppercase tracking-widest">Trend</span>
+        <div className="flex items-center gap-1">
           {item.stability === "Stable" ? (
-            <><TrendingUp className="w-4 h-4 text-green-400" /><span className="text-sm font-medium text-green-400">Stable</span></>
+            <><TrendingUp className="w-3.5 h-3.5 text-emerald-400" /><span className="text-xs font-medium text-emerald-400">Stable</span></>
           ) : (
-            <><TrendingDown className="w-4 h-4 text-red-400" /><span className="text-sm font-medium text-red-400">Dropping</span></>
+            <><TrendingDown className="w-3.5 h-3.5 text-rose-400" /><span className="text-xs font-medium text-rose-400">Dropping</span></>
           )}
         </div>
       </div>

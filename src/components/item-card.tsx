@@ -35,7 +35,8 @@ export function ItemCard({ item }: ItemCardProps) {
   };
 
   return (
-    <Card className="flex flex-col bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+    // Added max-w-[280px] and mx-auto to keep cards compact and centered
+    <Card className="flex flex-col w-full max-w-[280px] mx-auto bg-card/50 border-card-border overflow-hidden backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
       <div className="p-4 flex-1">
         
         {/* --- DYNAMIC IMAGE CONTAINER WITH SILVER SHINY SHIMMER EFFECT --- */}
@@ -48,10 +49,7 @@ export function ItemCard({ item }: ItemCardProps) {
           {/* Silver Shine Reflection Overlay */}
           {item.rarity.includes("Shiny") && (
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-              {/* Static light glare edges */}
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/5 to-white/10 mix-blend-overlay" />
-              
-              {/* Sliding shine animation when hovering over the card */}
               <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-all duration-1000 ease-out group-hover:left-[200%]" />
             </div>
           )}
@@ -65,7 +63,7 @@ export function ItemCard({ item }: ItemCardProps) {
         </div>
 
         <div className="flex justify-between items-start mb-4 gap-2">
-          <h3 className="font-bold text-lg text-foreground leading-tight">{item.name}</h3>
+          <h3 className="font-bold text-lg text-foreground leading-tight truncate">{item.name}</h3>
           <Badge variant="outline" className={`whitespace-nowrap ${getRarityColor(item.rarity)}`}>
             {item.rarity}
           </Badge>

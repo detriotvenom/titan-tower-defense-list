@@ -8,7 +8,6 @@ interface ItemCardProps {
   item: Item;
 }
 
-// 1. We use a mapping object for clean, high-performance styling
 const RARITY_MAP: Record<string, string> = {
   secret: "bg-purple-600",
   mythic: "bg-rose-500",
@@ -18,14 +17,10 @@ const RARITY_MAP: Record<string, string> = {
 };
 
 const getRarityStyles = (item: Item) => {
-  // 2. Shiny items always get the special animation
   if (item.isShiny) {
-    return "bg-gradient-to-r from-slate-700 via-slate-100 to-slate-700 bg-[length:200%_100%] animate-shine";
+    return "bg-[linear-gradient(90deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%)] bg-[length:200%_100%] animate-shine bg-slate-700";
   }
-
-  // 3. Fallback to map, or default to slate if rarity not found
-  const rarityKey = item.rarity.toLowerCase();
-  return RARITY_MAP[rarityKey] || "bg-slate-500";
+  return RARITY_MAP[item.rarity.toLowerCase()] || "bg-slate-500";
 };
 
 export function ItemCard({ item }: ItemCardProps) {
@@ -35,7 +30,7 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="group relative w-[280px] p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all hover:scale-[1.02] duration-300">
       <Card className="h-full bg-card/80 backdrop-blur-md border-none shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Dynamic Color Bar */}
+        {/* Dynamic Color Bar - Now using linear-gradient for better shine visibility */}
         <div className={`h-1.5 w-full ${rarityStyle}`} />
 
         <div className="relative w-full h-40 bg-black/20 flex items-center justify-center overflow-hidden">

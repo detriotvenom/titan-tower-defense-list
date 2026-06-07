@@ -8,12 +8,15 @@ interface ItemCardProps {
   item: Item;
 }
 
-const getRarityStyles = (rarity: string) => {
-  const r = rarity.toLowerCase();
+// Logic: Check for Shiny first, then check Rarity strings
+const getRarityStyles = (item: Item) => {
+  if (item.isShiny) {
+    return "bg-gradient-to-r from-slate-700 via-slate-100 to-slate-700 bg-[length:200%_100%] animate-shine";
+  }
+
+  const r = item.rarity.toLowerCase();
   
-  // Static mapping ensures Tailwind compiles these classes
   if (r.includes("secret")) return "bg-purple-600";
-  if (r.includes("shiny")) return "bg-gradient-to-r from-slate-700 via-slate-100 to-slate-700 bg-[length:200%_100%] animate-shine";
   if (r.includes("mythic")) return "bg-rose-500";
   if (r.includes("legendary")) return "bg-amber-500";
   if (r.includes("epic")) return "bg-blue-500";
@@ -22,14 +25,13 @@ const getRarityStyles = (rarity: string) => {
 };
 
 export function ItemCard({ item }: ItemCardProps) {
-  // Get the style string
-  const rarityStyle = getRarityStyles(item.rarity);
+  const rarityStyle = getRarityStyles(item);
 
   return (
     <div className="group relative w-[280px] p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all hover:scale-[1.02] duration-300">
       <Card className="h-full bg-card/80 backdrop-blur-md border-none shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Bar - using the style string directly */}
+        {/* Rarity/Shiny Bar */}
         <div className={`h-1.5 w-full ${rarityStyle}`} />
 
         {/* Image Area */}

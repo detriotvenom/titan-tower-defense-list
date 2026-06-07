@@ -10,6 +10,7 @@
   --color-muted-foreground: hsl(220 10% 60%);
   
   --animate-pulse-slow: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-rainbow: rainbow 3s linear infinite;
 }
 
 @keyframes pulse-slow {
@@ -17,16 +18,11 @@
   50% { opacity: 1; }
 }
 
-@layer base {
-  body { @apply bg-background text-foreground antialiased; }
-}
-@theme {
-  /* Existing theme variables... */
-  
-  --animate-rainbow: rainbow 3s linear infinite;
-}
-
 @keyframes rainbow {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
+}
+
+@layer base {
+  body { @apply bg-background text-foreground antialiased; }
 }

@@ -22,11 +22,11 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Bar with Shine Overlay */}
+        {/* Rarity Indicator Bar */}
         <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
-          {item.isShiny && (
-            <div className="absolute inset-0 animate-shine bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.4)_50%,transparent_100%)] bg-[length:200%_100%]" />
-          )}
+           {/* If you don't see the shine, the condition below might be failing. 
+               Remove {item.isShiny && ...} to test if the shine shows at all. */}
+           <div className="absolute inset-0 animate-shine bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.6)_50%,transparent_100%)] bg-[length:200%_100%]" />
         </div>
 
         {/* Item Image */}

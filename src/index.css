@@ -5,48 +5,37 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* ... keep your existing theme definitions here ... */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-muted-foreground: hsl(var(--muted-foreground));
 }
 
-:root {
-  /* BACKGROUND: A true, deep charcoal */
-  --background: 220 20% 5%;
-  --foreground: 0 0% 95%;
-
-  /* CARDS: Slightly lighter than background to create depth */
-  --card: 220 20% 9%;
-  --card-foreground: 0 0% 95%;
-  --card-border: 220 20% 18%;
-
-  /* PRIMARY: Using a crisp blue-white for better readability */
-  --primary: 210 100% 90%;
-  --primary-foreground: 220 20% 10%;
-
-  /* MUTED: Brighter than before so labels are easier to read */
-  --muted: 220 20% 15%;
-  --muted-foreground: 220 10% 70%;
-
-  /* ACCENTS: Consistent border colors */
-  --border: 220 20% 18%;
-  --input: 220 20% 18%;
-  --ring: 210 100% 90%;
+:root, .dark {
+  /* 1. BACKGROUND: A neutral, deep charcoal (not pitch black) */
+  --background: 220 15% 8%; 
+  
+  /* 2. CARDS: A slightly lighter, comfortable layer */
+  --card: 220 15% 12%; 
+  --card-foreground: 220 10% 90%; /* Soft off-white, not harsh white */
+  
+  /* 3. FOREGROUND: The main text is now a softer, readable light gray */
+  --foreground: 220 10% 85%; 
+  
+  /* 4. PRIMARY: A warm blue that's easier on the eyes */
+  --primary: 215 80% 65%; 
+  
+  /* 5. MUTED: A balanced gray for labels */
+  --muted-foreground: 220 10% 60%;
+  
+  /* 6. BORDER: Low-intensity borders to avoid "grid-lines" clutter */
+  --border: 220 15% 20%;
   
   --app-font-sans: 'Inter', system-ui, sans-serif;
-  --radius: 0.75rem; /* Slightly softer corners for a modern feel */
-}
-
-/* Make sure .dark also uses these improved values */
-.dark {
-  --background: 220 20% 5%;
-  --foreground: 0 0% 95%;
-  --card: 220 20% 9%;
-  --card-foreground: 0 0% 95%;
-  --card-border: 220 20% 18%;
-  --primary: 210 100% 90%;
-  --primary-foreground: 220 20% 10%;
-  --muted: 220 20% 15%;
-  --muted-foreground: 220 10% 70%;
-  --border: 220 20% 18%;
+  --radius: 0.75rem;
 }
 
 @layer base {
@@ -56,13 +45,14 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  /* Improve text rendering */
+  
+  /* Soften the headers so they aren't "blinding" white */
   h1, h2, h3, h4 {
-    @apply text-white font-bold tracking-tight;
+    @apply text-foreground font-semibold tracking-tight;
   }
 }
 
-/* Keeping your animations */
+/* Animations */
 @keyframes rainbow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

@@ -25,7 +25,6 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="w-[280px] transition-transform hover:-translate-y-1">
       <Card className="h-full bg-slate-900 border border-slate-700 shadow-xl flex flex-col overflow-hidden">
         
-        {/* Rainbow Bar */}
         <div 
           className={`h-2 w-full ${!isShiny ? barColor : ""}`}
           style={isShiny ? {
@@ -35,14 +34,12 @@ export function ItemCard({ item }: ItemCardProps) {
           } : {}}
         />
 
-        {/* Image Container */}
         <div className="p-4 flex items-center justify-center h-40 bg-slate-950/30">
           <div className="border border-slate-700 rounded-lg p-2 bg-slate-950/50 shadow-inner">
             <img src={item.image} alt={item.name} className="w-20 h-20 object-contain" />
           </div>
         </div>
 
-        {/* Details Section */}
         <div className="p-4 flex flex-col gap-1.5">
           <h3 className="font-bold text-sm text-slate-100 truncate">{item.name}</h3>
           
@@ -54,11 +51,10 @@ export function ItemCard({ item }: ItemCardProps) {
             <div className="flex gap-4">
               <div className="text-right">
                 <p className="text-[8px] text-slate-500 font-black uppercase">Val</p>
-                <p className="text-xs font-bold text-white">{item.value || "0.00"}</p>
+                <p className="text-xs font-bold text-white">{item.value || "-"}</p>
               </div>
               <div className="text-right">
                 <p className="text-[8px] text-slate-500 font-black uppercase">UTTV</p>
-                {/* Fallback to "-" if uttv is missing */}
                 <p className="text-xs font-bold text-emerald-400">{item.uttv || "-"}</p>
               </div>
             </div>

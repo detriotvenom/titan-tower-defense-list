@@ -8,12 +8,12 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  // 1. Logic: Detect Shiny
+  // Logic: Shiny if flag is true OR name contains "Shiny"
   const isShiny = item.isShiny === true || (item.name && item.name.toLowerCase().includes("shiny"));
 
-  // 2. Logic: Restore your Rarity Colors
+  // Updated color map with 'secret' set to black
   const rarityColors: Record<string, string> = {
-    secret: "bg-purple-500",
+    secret: "bg-black",
     mythic: "bg-rose-500",
     legendary: "bg-amber-500",
     epic: "bg-blue-500",
@@ -26,7 +26,7 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Indicator Bar */}
+        {/* Rarity Indicator Bar: Base color + Pulsing Overlay */}
         <div className={`relative h-1.5 w-full ${barColor}`}>
           {isShiny && (
             <div 
@@ -36,17 +36,23 @@ export function ItemCard({ item }: ItemCardProps) {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundColor: 'rgba(255, 255, 255, 0.4)', // Semi-transparent white
+                backgroundColor: 'rgba(255, 255, 255, 0.4)',
                 animation: 'pulse 1.5s infinite'
               }}
             />
           )}
         </div>
 
+        {/* Item Image */}
         <div className="p-6 bg-slate-950/20 flex items-center justify-center h-40">
-          <img src={item.image} alt={item.name} className="max-w-[80%] max-h-[80%] object-contain drop-shadow-lg" />
+          <img 
+            src={item.image} 
+            alt={item.name} 
+            className="max-w-[80%] max-h-[80%] object-contain drop-shadow-lg" 
+          />
         </div>
 
+        {/* Details */}
         <div className="p-5 flex flex-col gap-1">
           <div className="flex justify-between items-start">
             <h3 className="font-semibold text-lg text-slate-100 leading-snug">{item.name}</h3>

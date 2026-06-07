@@ -1,58 +1,46 @@
 import React from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Shield, Database, Gamepad2, MessageSquare, TrendingUp, Info } from "lucide-react";
+import { Shield, Database, Gamepad2, MessageSquare } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
-      <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
+      <div className="max-w-2xl space-y-10">
         
-        {/* Main Hero Card */}
-        <div className="md:col-span-2 p-8 rounded-3xl bg-card border border-border flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-6">
-            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
-              <Shield className="w-10 h-10 text-primary" />
-            </div>
-            <div className="text-left">
-              <h1 className="text-4xl font-black tracking-tight">TTD Value List</h1>
-              <p className="text-muted-foreground mt-1">The definitive source for Titan Tower Defense market data.</p>
-            </div>
+        {/* Branding Section */}
+        <div className="space-y-6">
+          <div className="mx-auto w-24 h-24 rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-2xl shadow-primary/10">
+            <Shield className="w-12 h-12 text-primary" />
           </div>
+          <div className="space-y-2">
+            <h1 className="text-6xl font-black tracking-tight text-foreground">
+              TTD <span className="text-primary">Value List</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-lg mx-auto leading-relaxed">
+              The industry-standard market intelligence tool for Titan Tower Defense.
+            </p>
+          </div>
+        </div>
+
+        {/* Primary Call to Action */}
+        <div className="flex justify-center">
           <Link href="/database">
-            <Button size="lg" className="h-14 px-8 font-bold text-lg gap-2 shadow-lg shadow-primary/20">
-              Launch Database <Database className="w-5 h-5" />
+            <Button size="lg" className="h-16 px-12 text-xl font-black gap-3 shadow-xl shadow-primary/20 hover:scale-105 transition-transform duration-300">
+              Value List <Database className="w-6 h-6" />
             </Button>
           </Link>
         </div>
 
-        {/* Secondary Info Cards */}
-        <div className="p-6 rounded-3xl bg-card border border-border space-y-4">
-          <Gamepad2 className="w-8 h-8 text-primary" />
-          <h3 className="text-xl font-bold">Play the Game</h3>
-          <p className="text-sm text-muted-foreground">Jump directly into the action on Roblox.</p>
-          <a href="https://roblox.com" target="_blank" rel="noreferrer">
-            <Button variant="outline" className="w-full">Play Now</Button>
+        {/* Community Links (Subtle) */}
+        <div className="flex items-center justify-center gap-6 pt-8 border-t border-white/5">
+          <a href="https://roblox.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 font-bold text-sm">
+            <Gamepad2 className="w-4 h-4" /> Play Game
           </a>
-        </div>
-
-        <div className="p-6 rounded-3xl bg-card border border-border space-y-4">
-          <MessageSquare className="w-8 h-8 text-primary" />
-          <h3 className="text-xl font-bold">Community Discord</h3>
-          <p className="text-sm text-muted-foreground">Join thousands of traders to discuss values.</p>
-          <a href="https://discord.gg" target="_blank" rel="noreferrer">
-            <Button variant="outline" className="w-full">Join Server</Button>
+          <div className="w-px h-4 bg-white/10" />
+          <a href="https://discord.gg" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 font-bold text-sm">
+            <MessageSquare className="w-4 h-4" /> Join Discord
           </a>
-        </div>
-
-        {/* Footer/Info Bar */}
-        <div className="md:col-span-2 flex items-center justify-between px-6 py-4 rounded-full bg-card border border-border text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-emerald-500" /> Market data updated hourly
-          </div>
-          <div className="flex items-center gap-2">
-            <Info className="w-4 h-4" /> Version 2.4.0 Stable
-          </div>
         </div>
 
       </div>

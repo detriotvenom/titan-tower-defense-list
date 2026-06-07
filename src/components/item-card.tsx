@@ -18,20 +18,30 @@ const RARITY_MAP: Record<string, string> = {
 
 const getRarityStyles = (item: Item) => {
   if (item.isShiny) {
-    return "bg-[linear-gradient(90deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%)] bg-[length:200%_100%] animate-shine bg-slate-700";
+    // We return a base background class, the animation class, and an inline style object
+    return "bg-slate-700 animate-shine";
   }
   return RARITY_MAP[item.rarity.toLowerCase()] || "bg-slate-500";
 };
 
 export function ItemCard({ item }: ItemCardProps) {
   const rarityStyle = getRarityStyles(item);
+  
+  // Define the shining gradient effect as an inline style to guarantee it renders
+  const shinyStyle = item.isShiny ? {
+    backgroundImage: "linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%)",
+    backgroundSize: "200% 100%",
+  } : {};
 
   return (
     <div className="group relative w-[280px] p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all hover:scale-[1.02] duration-300">
       <Card className="h-full bg-card/80 backdrop-blur-md border-none shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Dynamic Color Bar - Now using linear-gradient for better shine visibility */}
-        <div className={`h-1.5 w-full ${rarityStyle}`} />
+        {/* Dynamic Color Bar */}
+        <div 
+          className={`h-1.5 w-full ${rarityStyle}`} 
+          style={shinyStyle}
+        />
 
         <div className="relative w-full h-40 bg-black/20 flex items-center justify-center overflow-hidden">
           <img 

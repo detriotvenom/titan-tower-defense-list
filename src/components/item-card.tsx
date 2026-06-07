@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import type { Item } from "@/lib/items-store";
@@ -8,6 +8,19 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
+  const [opacity, setOpacity] = useState(0.3);
+
+  useEffect(() => {
+    if (!item.isShiny) return;
+    
+    // This manually pulses the brightness every 1 second
+    const interval = setInterval(() => {
+      setOpacity((prev) => (prev === 0.3 ? 1 : 0.3));
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [item.isShiny]);
+
   const rarityColors: Record<string, string> = {
     secret: "bg-purple-500",
     mythic: "bg-rose-500",
@@ -25,7 +38,10 @@ export function ItemCard({ item }: ItemCardProps) {
         {/* Rarity Indicator Bar */}
         <div className={`relative h-1.5 w-full ${barColor}`}>
           {item.isShiny && (
-            <div className="absolute inset-0 bg-white animate-pulse-slow" />
+            <div 
+              className="absolute inset-0 bg-white transition-opacity duration-1000" 
+              style={{ opacity: opacity }}
+            />
           )}
         </div>
 

@@ -1,7 +1,7 @@
 export const items = [
   { name: "Shiny Slotman (Highroller)", category: "Unit", rarity: "Shiny Secret", value: "9900.00", uttv: "110.00", demand: 1.0, stability: "Stable", image: "https://i.ibb.co/9kqKdRGS/image.png" },
   { name: "Shiny Clock Woman (Future)", category: "Unit", rarity: "Shiny Secret", value: "7200.00", uttv: "80.00", demand: 2.0, stability: "Stable", image: "https://i.ibb.co/jkzdN54R/image.png" },
-  { name: "Shiny Titan Grill (Full Gas)", category: "Unit", rarity: "Shiny Secret", value: "6300.00", uttv: "70.00", demand: 5.0, stability: "Stable", image: "https://ibb.co/nKDMzQV" },
+  { name: "Shiny Titan Grill (Full Gas)", category: "Unit", rarity: "Shiny Secret", value: "6300.00", uttv: "70.00", demand: 5.0, stability: "Stable", image: "https://i.ibb.co/H9rTnGM/image.png" },
   { name: "Slotman (Highroller)", category: "Unit", rarity: "Secret", value: "4500.00", uttv: "50.00", demand: 4.0, stability: "Stable", image: "https://i.ibb.co/9kqKdRGS/image.png" },
   { name: "Shiny Bomb Woman (Nuclear)", category: "Unit", rarity: "Shiny Secret", value: "4500.00", uttv: "50.00", demand: 2.0, stability: "Stable", image: "https://ibb.co/N248vvzZ" },
   { name: "Shiny Zombie Titan TV (Enraged)", category: "Unit", rarity: "Shiny Secret", value: "4500.00", uttv: "50.00", demand: 5.0, stability: "Stable", image: "https://ibb.co/KpcjPB5G" },
@@ -12,7 +12,7 @@ export const items = [
   { name: "Titan Grill", category: "Unit", rarity: "Secret", value: "2970.00", uttv: "33.00", demand: 2.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Shiny Titan Grill", category: "Unit", rarity: "Shiny Secret", value: "2970.00", uttv: "33.00", demand: 2.0, stability: "Stable", image: "https://placehold.co/150" },
   { name: "Shiny CH4D Camera", category: "Unit", rarity: "Shiny Mythic", value: "2700.00", uttv: "30.00", demand: 3.0, stability: "Stable", image: "https://placehold.co/150" },
-  { name: "Titan Grill (Full Gas)", category: "Unit", rarity: "Secret", value: "2520.00", uttv: "28.00", demand: 7.0, stability: "Stable", image: "https://ibb.co/nKDMzQV" },
+  { name: "Titan Grill (Full Gas)", category: "Unit", rarity: "Secret", value: "2520.00", uttv: "28.00", demand: 7.0, stability: "Stable", image: "https://i.ibb.co/H9rTnGM/image.png" },
   { name: "Shiny Energy TV Woman (Scythe)", category: "Unit", rarity: "Shiny Secret", value: "2025.00", uttv: "22.50", demand: 3.0, stability: "Stable", image: "https://ibb.co/x82G95DW" },
   { name: "Bomb Woman (Nuclear)", category: "Unit", rarity: "Secret", value: "2160.00", uttv: "24.0", demand: 6.0, stability: "Stable", image: "https://ibb.co/N248vvzZ" },
   { name: "Shiny Enhanced Energy TV", category: "Unit", rarity: "Shiny Secret", value: "1980.00", uttv: "22.00", demand: 3.0, stability: "Stable", image: "https://placehold.co/150" },

@@ -35,7 +35,7 @@ export function ItemCard({ item }: ItemCardProps) {
           } : {}}
         />
 
-        {/* Compact Image Container */}
+        {/* Image Container */}
         <div className="p-4 flex items-center justify-center h-40 bg-slate-950/30">
           <div className="border border-slate-700 rounded-lg p-2 bg-slate-950/50 shadow-inner">
             <img src={item.image} alt={item.name} className="w-20 h-20 object-contain" />
@@ -54,11 +54,12 @@ export function ItemCard({ item }: ItemCardProps) {
             <div className="flex gap-4">
               <div className="text-right">
                 <p className="text-[8px] text-slate-500 font-black uppercase">Val</p>
-                <p className="text-xs font-bold text-white">{item.value}</p>
+                <p className="text-xs font-bold text-white">{item.value || "0.00"}</p>
               </div>
               <div className="text-right">
                 <p className="text-[8px] text-slate-500 font-black uppercase">UTTV</p>
-                <p className="text-xs font-bold text-emerald-400">{item.uttv}</p>
+                {/* Fallback to "-" if uttv is missing */}
+                <p className="text-xs font-bold text-emerald-400">{item.uttv || "-"}</p>
               </div>
             </div>
           </div>

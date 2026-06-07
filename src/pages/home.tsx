@@ -16,19 +16,28 @@ export default function Home() {
 
   const filteredAndSortedItems = useMemo(() => {
     let result = [...loadItems()];
+    
+    // 1. Search filter
     if (search.trim()) {
       const lowerSearch = search.toLowerCase();
       result = result.filter(item => item.name.toLowerCase().includes(lowerSearch));
     }
+
+    // 2. Updated Filtering Logic: Rarity vs Category
     if (rarityFilter !== "All") {
-      result = rarityFilter === "Shiny" 
-        ? result.filter(item => item.rarity.startsWith("Shiny"))
-        : result.filter(item => item.rarity.includes(rarityFilter));
+      result = result.filter(item => {
+        if (rarityFilter === "Shiny") return item.rarity.startsWith("Shiny");
+        if (rarityFilter === "Item") return item.category === "Item"; // Matches the new data field
+        return item.rarity === rarityFilter; // Standard rarity match
+      });
     }
+
+    // 3. Sorting
     result.sort((a, b) => {
       const getVal = (v: string) => parseFloat(v.split('-')[0].trim().replace(/,/g, ''));
       return sortOrder === "desc" ? getVal(b.value) - getVal(a.value) : getVal(a.value) - getVal(b.value);
     });
+    
     return result;
   }, [search, rarityFilter, sortOrder]);
 
@@ -36,7 +45,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground pb-20">
-      {/* Header with Clickable Logo/Title */}
       <header className="border-b border-border/50 bg-card/30 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -66,7 +74,6 @@ export default function Home() {
       </header>
 
       <main className="container mx-auto px-4 mt-8">
-        {/* Filter Controls */}
         <div className="flex flex-wrap items-center justify-between gap-4 bg-card/30 p-4 rounded-xl border border-white/5 mb-8">
           <div className="flex flex-wrap gap-2">
             {rarities.map((r) => (
@@ -87,7 +94,6 @@ export default function Home() {
           </Button>
         </div>
 
-        {/* Contained Grid: The "Professional Layout" */}
         <div className="max-w-[1200px] mx-auto">
           {filteredAndSortedItems.length > 0 ? (
             <div className="flex flex-wrap justify-center gap-3">

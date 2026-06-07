@@ -1,2 +1,15 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-background: hsl(220 20% 4%);
+  --color-card: hsl(220 20% 8%);
+  --color-primary: hsl(215 100% 70%);
+  --color-border: hsl(220 20% 14%);
+  --color-foreground: hsl(0 0% 95%);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}

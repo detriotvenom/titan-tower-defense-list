@@ -8,15 +8,26 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  // Logic: True if isShiny is explicitly true OR name contains "Shiny"
+  // 1. Logic: Detect Shiny
   const isShiny = item.isShiny === true || (item.name && item.name.toLowerCase().includes("shiny"));
+
+  // 2. Logic: Restore your Rarity Colors
+  const rarityColors: Record<string, string> = {
+    secret: "bg-purple-500",
+    mythic: "bg-rose-500",
+    legendary: "bg-amber-500",
+    epic: "bg-blue-500",
+    item: "bg-slate-500",
+  };
+
+  const barColor = rarityColors[item.rarity.toLowerCase()] || "bg-slate-500";
 
   return (
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
         {/* Rarity Indicator Bar */}
-        <div className="relative h-1.5 w-full bg-slate-500 overflow-hidden">
+        <div className={`relative h-1.5 w-full ${barColor}`}>
           {isShiny && (
             <div 
               style={{
@@ -25,7 +36,7 @@ export function ItemCard({ item }: ItemCardProps) {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundColor: 'white',
+                backgroundColor: 'rgba(255, 255, 255, 0.4)', // Semi-transparent white
                 animation: 'pulse 1.5s infinite'
               }}
             />

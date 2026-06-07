@@ -4,13 +4,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
+@theme {
   --color-background: hsl(220 20% 4%);
   --color-card: hsl(220 20% 8%);
   --color-primary: hsl(215 100% 70%);
   --color-border: hsl(220 20% 14%);
   --color-foreground: hsl(0 0% 95%);
   --color-muted-foreground: hsl(220 10% 60%);
+
+  /* Define animation here so Tailwind v4 registers it */
+  --animate-shine: shine 3s linear infinite;
+
+  @keyframes shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 }
 
 @layer base {
@@ -20,15 +28,4 @@
   }
   * { @apply border-border; }
   h1, h2, h3, h4 { @apply text-foreground font-bold tracking-tight; }
-}
-
-/* Animations */
-@layer utilities {
-  @keyframes shine {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-  .animate-shine {
-    animation: shine 3s linear infinite;
-  }
 }

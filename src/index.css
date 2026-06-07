@@ -8,18 +8,20 @@
   --color-border: hsl(220 20% 14%);
   --color-foreground: hsl(0 0% 95%);
   --color-muted-foreground: hsl(220 10% 60%);
-
-  /* Define the animation and keyframes within the theme block */
-  --animate-shine: shine 3s linear infinite;
-  
-  @keyframes shine {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
 }
 
 @layer base {
-  body {
-    @apply bg-background text-foreground antialiased;
+  body { @apply bg-background text-foreground antialiased; }
+}
+
+/* Hard-coded animation that bypasses Tailwind's build engine */
+@layer utilities {
+  .animate-shine {
+    animation: shine-effect 3s linear infinite;
   }
+}
+
+@keyframes shine-effect {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }

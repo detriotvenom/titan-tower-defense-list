@@ -4,20 +4,11 @@
 @theme {
   --color-background: hsl(220 20% 4%);
   --color-card: hsl(220 20% 8%);
-  --color-primary: hsl(215 100% 70%);
-  --color-border: hsl(220 20% 14%);
-  --color-foreground: hsl(0 0% 95%);
-  --color-muted-foreground: hsl(220 10% 60%);
-  
-  --animate-pulse-slow: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  /* Added a stronger shadow for the glow effect */
+  --shadow-glow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
-
-@keyframes rainbow {
+@keyframes rainbow-move {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
 }

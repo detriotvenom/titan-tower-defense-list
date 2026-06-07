@@ -98,24 +98,26 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Compact Layout - Flexbox replaced Grid */}
-        {filteredAndSortedItems.length > 0 ? (
-          <div className="flex flex-wrap justify-center gap-3">
-            {filteredAndSortedItems.map((item) => (
-              <ItemCard key={item.name} item={item} />
-            ))}
-          </div>
-        ) : (
-          <div className="py-20 text-center flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
-              <Search className="w-8 h-8 text-muted-foreground/50" />
+        {/* REVISED LAYOUT: Contained, Centered, and Tightly Packed */}
+        <div className="max-w-[1200px] mx-auto">
+          {filteredAndSortedItems.length > 0 ? (
+            <div className="flex flex-wrap justify-center gap-3">
+              {filteredAndSortedItems.map((item) => (
+                <ItemCard key={item.name} item={item} />
+              ))}
             </div>
-            <h3 className="text-lg font-bold text-white mb-2">No items found</h3>
-            <Button variant="link" onClick={() => { setSearch(""); setRarityFilter("All"); }}>
-              Clear all filters
-            </Button>
-          </div>
-        )}
+          ) : (
+            <div className="py-20 text-center flex flex-col items-center">
+              <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                <Search className="w-8 h-8 text-muted-foreground/50" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">No items found</h3>
+              <Button variant="link" onClick={() => { setSearch(""); setRarityFilter("All"); }}>
+                Clear all filters
+              </Button>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

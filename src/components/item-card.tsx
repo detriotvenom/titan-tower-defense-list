@@ -22,8 +22,12 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Indicator Bar */}
-        <div className={`h-1.5 w-full ${barColor}`} />
+        {/* Rarity Indicator Bar with built-in Shimmer */}
+        <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
+          {item.isShiny && (
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-pulse" />
+          )}
+        </div>
 
         {/* Item Image */}
         <div className="p-6 bg-slate-950/20 flex items-center justify-center h-40">
@@ -41,6 +45,17 @@ export function ItemCard({ item }: ItemCardProps) {
             <Badge className="bg-slate-800 text-[10px] uppercase tracking-wider text-slate-300 border-none shrink-0 ml-2">
               {item.rarity}
             </Badge>
+          </div>
+          
+          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-700/50 pt-4">
+            <div>
+              <p className="text-[10px] uppercase text-slate-400 font-bold tracking-widest">Value</p>
+              <p className="text-lg font-bold text-slate-200">{item.value}</p>
+            </div>
+            <div>
+              <p className="text-[10px] uppercase text-slate-400 font-bold tracking-widest">Demand</p>
+              <p className="text-lg font-bold text-slate-200">{item.demand}/10</p>
+            </div>
           </div>
         </div>
       </Card>

@@ -1,18 +1,2 @@
-@theme {
-  /* ... your colors ... */
-
-  /* Define animation clearly */
-  --animate-shine: shine 3s linear infinite;
-}
-
-@keyframes shine {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Force Tailwind to output the class */
-@layer utilities {
-  .animate-shine {
-    animation: var(--animate-shine);
-  }
-}
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";

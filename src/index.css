@@ -20,3 +20,13 @@
 @layer base {
   body { @apply bg-background text-foreground antialiased; }
 }
+@theme {
+  /* Existing theme variables... */
+  
+  --animate-rainbow: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

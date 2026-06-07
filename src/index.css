@@ -9,9 +9,9 @@
   --color-foreground: hsl(0 0% 95%);
   --color-muted-foreground: hsl(220 10% 60%);
 
-  /* Define the animation here */
+  /* Define the animation and keyframes within the theme block */
   --animate-shine: shine 3s linear infinite;
-
+  
   @keyframes shine {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }

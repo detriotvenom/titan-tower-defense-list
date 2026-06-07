@@ -8,21 +8,16 @@
   --color-border: hsl(220 20% 14%);
   --color-foreground: hsl(0 0% 95%);
   --color-muted-foreground: hsl(220 10% 60%);
+  
+  /* Define the animation here so Tailwind recognizes it */
+  --animate-shimmer: shimmer 2s linear infinite;
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
 }
 
 @layer base {
   body { @apply bg-background text-foreground antialiased; }
-}
-
-@layer utilities {
-  .animate-shine {
-    animation: shine-effect 3s linear infinite;
-    background-image: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-    background-size: 200% 100%;
-  }
-}
-
-@keyframes shine-effect {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
 }

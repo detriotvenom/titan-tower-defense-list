@@ -23,9 +23,9 @@ export function ItemCard({ item }: ItemCardProps) {
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
         {/* Rarity Indicator Bar */}
-        <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
+        <div className={`relative h-1.5 w-full ${barColor}`}>
           {item.isShiny && (
-            <div className="absolute inset-0 w-full h-full bg-white/30 -skew-x-12 animate-shimmer" />
+            <div className="absolute inset-0 bg-white animate-pulse-slow" />
           )}
         </div>
 

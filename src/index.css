@@ -14,7 +14,6 @@
   body { @apply bg-background text-foreground antialiased; }
 }
 
-/* Hard-coded animation that bypasses Tailwind's build engine */
 @layer utilities {
   .animate-shine {
     animation: shine-effect 3s linear infinite;

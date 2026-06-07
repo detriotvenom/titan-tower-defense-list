@@ -9,19 +9,22 @@ interface ItemCardProps {
 }
 
 const getRarityBarStyles = (rarity: string) => {
-  // 1. Priority: Secrets take precedence over Shiny
-  if (rarity.includes("Secret")) return "bg-purple-600";
+  // Normalize string for safe comparison
+  const r = rarity.toLowerCase();
+
+  // 1. Priority: Secrets take precedence (Purple)
+  if (r.includes("secret")) return "bg-purple-600";
 
   // 2. Shiny: Silver metallic effect
-  if (rarity.includes("Shiny")) {
+  if (r.includes("shiny")) {
     return "bg-gradient-to-r from-slate-700 via-slate-100 to-slate-700 bg-[length:200%_100%] animate-shine";
   }
 
   // 3. Standard Rarities
-  switch (rarity) {
-    case "Mythic": return "bg-rose-500";
-    case "Legendary": return "bg-amber-500";
-    case "Epic": return "bg-blue-500";
+  switch (r) {
+    case "mythic": return "bg-rose-500";
+    case "legendary": return "bg-amber-500";
+    case "epic": return "bg-blue-500";
     default: return "bg-slate-500";
   }
 };

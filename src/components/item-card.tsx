@@ -8,11 +8,8 @@ interface ItemCardProps {
   item: Item;
 }
 
-// 1. Helper function for rarity-specific styling
 const getRarityBarStyles = (rarity: string) => {
-  if (rarity.includes("Shiny")) {
-    return "bg-gradient-to-r from-red-500 via-yellow-400 via-green-500 via-blue-500 to-purple-500 animate-pulse";
-  }
+  if (rarity.includes("Shiny")) return "bg-gradient-to-r from-red-500 via-yellow-400 via-green-500 via-blue-500 to-purple-500 animate-pulse";
   switch (rarity) {
     case "Secret": return "bg-purple-500";
     case "Mythic": return "bg-rose-500";
@@ -27,7 +24,7 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="group relative w-[280px] p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all hover:scale-[1.02] duration-300">
       <Card className="h-full bg-card/80 backdrop-blur-md border-none shadow-2xl flex flex-col overflow-hidden">
         
-        {/* 2. THE RARITY BAR */}
+        {/* Rarity Bar */}
         <div className={`h-1.5 w-full ${getRarityBarStyles(item.rarity)}`} />
 
         {/* Image Area */}
@@ -41,7 +38,13 @@ export function ItemCard({ item }: ItemCardProps) {
 
         {/* Content */}
         <div className="p-5 flex flex-col flex-1">
-          <h3 className="font-bold text-lg text-foreground mb-4 leading-tight">{item.name}</h3>
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-bold text-lg text-foreground leading-tight">{item.name}</h3>
+            {/* Added Rarity Badge back */}
+            <Badge variant="outline" className="text-[10px] uppercase tracking-widest border-white/10 bg-white/5">
+              {item.rarity}
+            </Badge>
+          </div>
           
           <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
             <div>
@@ -55,12 +58,27 @@ export function ItemCard({ item }: ItemCardProps) {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="px-5 py-3 bg-white/[0.03] border-t border-white/5 flex items-center justify-between">
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Demand</span>
-          <span className={`font-black text-sm tabular-nums ${item.demand >= 7 ? 'text-emerald-400' : item.demand >= 4 ? 'text-amber-400' : 'text-rose-400'}`}>
-            {item.demand.toFixed(1)}/10
-          </span>
+        {/* Footer with Demand AND Stability */}
+        <div className="grid grid-cols-2 bg-white/[0.03] border-t border-white/5">
+          <div className="px-4 py-3 border-r border-white/5">
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-0.5">Demand</p>
+            <p className={`font-black text-sm tabular-nums ${item.demand >= 7 ? 'text-emerald-400' : 'text-amber-400'}`}>
+              {item.demand.toFixed(1)}/10
+            </p>
+          </div>
+          <div className="px-4 py-3 flex flex-col justify-center">
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-0.5">Stability</p>
+            <div className="flex items-center gap-1">
+              {item.stability === "Stable" ? (
+                <TrendingUp className="w-3 h-3 text-emerald-400" />
+              ) : (
+                <TrendingDown className="w-3 h-3 text-rose-400" />
+              )}
+              <span className={`text-[11px] font-bold ${item.stability === "Stable" ? 'text-emerald-400' : 'text-rose-400'}`}>
+                {item.stability}
+              </span>
+            </div>
+          </div>
         </div>
       </Card>
     </div>

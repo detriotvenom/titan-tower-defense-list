@@ -8,18 +8,27 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  // FALLBACK LOGIC: 
-  // It checks if 'isShiny' is true OR if the name includes "Shiny"
+  // Logic: True if isShiny is explicitly true OR name contains "Shiny"
   const isShiny = item.isShiny === true || (item.name && item.name.toLowerCase().includes("shiny"));
 
   return (
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Indicator Bar - Uses our logic now */}
-        <div className={`relative h-1.5 w-full bg-slate-500 overflow-hidden`}>
+        {/* Rarity Indicator Bar */}
+        <div className="relative h-1.5 w-full bg-slate-500 overflow-hidden">
           {isShiny && (
-            <div className="absolute inset-0 bg-white animate-pulse" />
+            <div 
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'white',
+                animation: 'pulse 1.5s infinite'
+              }}
+            />
           )}
         </div>
 

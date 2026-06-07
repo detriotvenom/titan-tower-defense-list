@@ -18,17 +18,16 @@ export function ItemCard({ item }: ItemCardProps) {
 
   const barColor = rarityColors[item.rarity.toLowerCase()] || "bg-slate-500";
 
-  // Helper to determine the bar style
-  const barClasses = item.isShiny
-    ? `h-1.5 w-full ${barColor} animate-shine bg-[length:200%_100%] bg-gradient-to-r from-transparent via-white/30 to-transparent`
-    : `h-1.5 w-full ${barColor}`;
-
   return (
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Indicator Bar */}
-        <div className={barClasses} />
+        {/* Rarity Indicator Bar - Clean & Simple */}
+        <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
+          {item.isShiny && (
+            <div className="absolute inset-0 animate-shine bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.4)_50%,transparent_100%)] bg-[length:200%_100%]" />
+          )}
+        </div>
 
         {/* Item Image */}
         <div className="p-6 bg-slate-950/20 flex items-center justify-center h-40">

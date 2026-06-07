@@ -17,8 +17,6 @@
 
 @layer base {
   body { 
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    antialiased; 
+    @apply bg-background text-foreground antialiased;
   }
 }

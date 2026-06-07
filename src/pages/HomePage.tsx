@@ -1,114 +1,43 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { Link } from "wouter";
-import { loadItems } from "@/lib/items-store";
-import { ItemCard } from "@/components/item-card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, ArrowDownAZ, ArrowUpAZ, Shield } from "lucide-react";
+import { Shield, Database, ArrowRight } from "lucide-react";
 
-type RarityFilter = "All" | "Shiny" | "Secret" | "Mythic" | "Legendary" | "Epic" | "Item";
-type SortOrder = "desc" | "asc";
-
-export default function Home() {
-  const [search, setSearch] = useState("");
-  const [rarityFilter, setRarityFilter] = useState<RarityFilter>("All");
-  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
-
-  const filteredAndSortedItems = useMemo(() => {
-    let result = [...loadItems()];
-    if (search.trim()) {
-      const lowerSearch = search.toLowerCase();
-      result = result.filter(item => item.name.toLowerCase().includes(lowerSearch));
-    }
-    if (rarityFilter !== "All") {
-      if (rarityFilter === "Shiny") {
-        result = result.filter(item => item.rarity.startsWith("Shiny"));
-      } else {
-        result = result.filter(item => item.rarity.includes(rarityFilter));
-      }
-    }
-    result.sort((a, b) => {
-      const getVal = (valStr: string) => parseFloat(valStr.split('-')[0].trim().replace(/,/g, ''));
-      const valA = getVal(a.value);
-      const valB = getVal(b.value);
-      return sortOrder === "desc" ? valB - valA : valA - valB;
-    });
-    return result;
-  }, [search, rarityFilter, sortOrder]);
-
-  const rarities: RarityFilter[] = ["All", "Shiny", "Secret", "Mythic", "Legendary", "Epic", "Item"];
-
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground pb-20">
-      {/* Header with Clickable Logo */}
-      <header className="border-b border-border/50 bg-card/30 backdrop-blur-xl sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <Link href="/">
-              <a className="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
-                  <Shield className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-black tracking-tight text-white">TTD Value List</h1>
-                  <p className="text-sm text-muted-foreground font-medium">Titan Tower Defense Community Value List</p>
-                </div>
-              </a>
-            </Link>
-            
-            <div className="w-full md:w-auto relative group">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
-              <Input 
-                placeholder="Search items..." 
-                className="w-full md:w-72 pl-9 bg-black/20 border-white/10 h-10"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-          </div>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
+      {/* Hero Section */}
+      <div className="max-w-3xl space-y-8">
+        <div className="mx-auto w-24 h-24 rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-8 animate-in fade-in zoom-in duration-700">
+          <Shield className="w-12 h-12 text-primary" />
         </div>
-      </header>
+        
+        <h1 className="text-5xl md:text-7xl font-black tracking-tight text-foreground">
+          TTD <span className="text-primary">Value List</span>
+        </h1>
+        
+        <p className="text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
+          The most trusted, up-to-date community tracking system for Titan Tower Defense. Stay ahead of the market.
+        </p>
 
-      {/* Main Content with Centered Container */}
-      <main className="container mx-auto px-4 mt-8">
-        <div className="flex flex-col gap-6 mb-8">
-          <div className="flex flex-wrap items-center justify-between gap-4 bg-card/30 p-4 rounded-xl border border-white/5">
-            <div className="flex flex-wrap gap-2">
-              {rarities.map((rarity) => (
-                <Button
-                  key={rarity}
-                  variant={rarityFilter === rarity ? "default" : "secondary"}
-                  size="sm"
-                  onClick={() => setRarityFilter(rarity)}
-                  className={`rounded-full px-4 ${rarityFilter === rarity ? '' : 'bg-black/20 text-muted-foreground border border-white/5'}`}
-                >
-                  {rarity}
-                </Button>
-              ))}
-            </div>
-            <Button variant="outline" size="sm" onClick={() => setSortOrder(prev => prev === "desc" ? "asc" : "desc")} className="gap-2 bg-black/20 border-white/10">
-              {sortOrder === "desc" ? <ArrowDownAZ className="w-4 h-4" /> : <ArrowUpAZ className="w-4 h-4" />}
-              Sort: {sortOrder === "desc" ? "High to Low" : "Low to High"}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <Link href="/database">
+            <Button size="lg" className="h-14 px-8 text-lg font-bold gap-2">
+              View Database <Database className="w-5 h-5" />
             </Button>
-          </div>
+          </Link>
+          <Link href="/admin">
+            <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-border/50">
+              Admin Portal
+            </Button>
+          </Link>
         </div>
+      </div>
 
-        {/* The "Contained" grid area */}
-        <div className="max-w-[1200px] mx-auto">
-          {filteredAndSortedItems.length > 0 ? (
-            <div className="flex flex-wrap justify-center gap-3">
-              {filteredAndSortedItems.map((item) => (
-                <ItemCard key={item.name} item={item} />
-              ))}
-            </div>
-          ) : (
-            <div className="py-20 text-center">
-              <h3 className="text-lg font-bold text-white mb-2">No items found</h3>
-              <Button variant="link" onClick={() => { setSearch(""); setRarityFilter("All"); }}>Clear filters</Button>
-            </div>
-          )}
-        </div>
-      </main>
+      {/* Footer Info */}
+      <div className="absolute bottom-8 text-muted-foreground/50 text-sm">
+        Updated daily by the TTD community
+      </div>
     </div>
   );
 }

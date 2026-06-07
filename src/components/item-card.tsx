@@ -1,40 +1,31 @@
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import type { Item } from "@/lib/items-store";
+import { useEffect, useRef } from "react";
 
-interface ItemCardProps {
-  item: Item;
-}
+// ... inside your ItemCard component:
 
-export function ItemCard({ item }: ItemCardProps) {
-  return (
-    <div className="w-[280px]">
-      <Card className="h-full bg-slate-900 border border-white/10 overflow-hidden">
-        
-        {/* FORCED SHINE TEST */}
-        <div className="relative h-4 w-full bg-slate-800 overflow-hidden">
-            <div 
-              style={{
-                position: "absolute",
-                top: 0, left: 0, right: 0, bottom: 0,
-                zIndex: 99,
-                background: "linear-gradient(90deg, transparent, white, transparent)",
-                backgroundSize: "200% 100%",
-                animation: "shine-test 1s linear infinite"
-              }}
-            />
-        </div>
-        <style>{`
-          @keyframes shine-test {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-          }
-        `}</style>
-        
-        {/* ... rest of your card ... */}
-        <div className="p-4 text-white">TESTING ANIMATION</div>
-      </Card>
-    </div>
-  );
-}
+const shineRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  if (shineRef.current) {
+    shineRef.current.animate(
+      [
+        { backgroundPosition: "-200% 0" },
+        { backgroundPosition: "200% 0" }
+      ],
+      {
+        duration: 3000,
+        iterations: Infinity,
+        easing: "linear"
+      }
+    );
+  }
+}, []);
+
+// ... in your return statement:
+<div 
+  ref={shineRef}
+  className="absolute inset-0 z-10"
+  style={{
+    backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%)",
+    backgroundSize: "200% 100%",
+  }}
+/>

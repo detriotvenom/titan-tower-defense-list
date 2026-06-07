@@ -24,9 +24,16 @@ export function ItemCard({ item }: ItemCardProps) {
         
         {/* Rarity Indicator Bar */}
         <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
-           {/* If you don't see the shine, the condition below might be failing. 
-               Remove {item.isShiny && ...} to test if the shine shows at all. */}
-           <div className="absolute inset-0 animate-shine bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.6)_50%,transparent_100%)] bg-[length:200%_100%]" />
+          {item.isShiny && (
+            <div 
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%)",
+                backgroundSize: "200% 100%",
+                animation: "shine-effect 3s linear infinite"
+              }}
+            />
+          )}
         </div>
 
         {/* Item Image */}
@@ -38,7 +45,7 @@ export function ItemCard({ item }: ItemCardProps) {
           />
         </div>
 
-        {/* Content Details */}
+        {/* Content */}
         <div className="p-5 flex flex-col gap-1">
           <div className="flex justify-between items-start">
             <h3 className="font-semibold text-lg text-slate-100 leading-snug">{item.name}</h3>

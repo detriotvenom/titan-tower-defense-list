@@ -22,30 +22,34 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Rarity Indicator Bar */}
+        {/* Rarity Bar - FORCED SHINE */}
         <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
           {item.isShiny && (
             <div 
-              className="absolute inset-0"
               style={{
-                backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%)",
+                position: "absolute",
+                inset: 0,
+                zIndex: 10,
+                backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%)",
                 backgroundSize: "200% 100%",
-                animation: "shine-effect 3s linear infinite"
+                animation: "shine-animation 2s linear infinite"
               }}
             />
           )}
         </div>
 
-        {/* Item Image */}
+        {/* CSS Injection for the animation */}
+        <style>{`
+          @keyframes shine-animation {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+          }
+        `}</style>
+
         <div className="p-6 bg-slate-950/20 flex items-center justify-center h-40">
-          <img 
-            src={item.image} 
-            alt={item.name} 
-            className="max-w-[80%] max-h-[80%] object-contain drop-shadow-lg" 
-          />
+          <img src={item.image} alt={item.name} className="max-w-[80%] max-h-[80%] object-contain drop-shadow-lg" />
         </div>
 
-        {/* Content */}
         <div className="p-5 flex flex-col gap-1">
           <div className="flex justify-between items-start">
             <h3 className="font-semibold text-lg text-slate-100 leading-snug">{item.name}</h3>

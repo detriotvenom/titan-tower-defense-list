@@ -8,67 +8,32 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  const rarityColors: Record<string, string> = {
-    secret: "bg-purple-500",
-    mythic: "bg-rose-500",
-    legendary: "bg-amber-500",
-    epic: "bg-blue-500",
-    item: "bg-slate-500",
-  };
-
-  const barColor = rarityColors[item.rarity.toLowerCase()] || "bg-slate-500";
-
   return (
-    <div className="w-[280px] transition-all hover:scale-[1.02]">
-      <Card className="h-full bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl flex flex-col overflow-hidden">
+    <div className="w-[280px]">
+      <Card className="h-full bg-slate-900 border border-white/10 overflow-hidden">
         
-        {/* Rarity Bar - FORCED SHINE */}
-        <div className={`relative h-1.5 w-full ${barColor} overflow-hidden`}>
-          {item.isShiny && (
+        {/* FORCED SHINE TEST */}
+        <div className="relative h-4 w-full bg-slate-800 overflow-hidden">
             <div 
               style={{
                 position: "absolute",
-                inset: 0,
-                zIndex: 10,
-                backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%)",
+                top: 0, left: 0, right: 0, bottom: 0,
+                zIndex: 99,
+                background: "linear-gradient(90deg, transparent, white, transparent)",
                 backgroundSize: "200% 100%",
-                animation: "shine-animation 2s linear infinite"
+                animation: "shine-test 1s linear infinite"
               }}
             />
-          )}
         </div>
-
-        {/* CSS Injection for the animation */}
         <style>{`
-          @keyframes shine-animation {
+          @keyframes shine-test {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
           }
         `}</style>
-
-        <div className="p-6 bg-slate-950/20 flex items-center justify-center h-40">
-          <img src={item.image} alt={item.name} className="max-w-[80%] max-h-[80%] object-contain drop-shadow-lg" />
-        </div>
-
-        <div className="p-5 flex flex-col gap-1">
-          <div className="flex justify-between items-start">
-            <h3 className="font-semibold text-lg text-slate-100 leading-snug">{item.name}</h3>
-            <Badge className="bg-slate-800 text-[10px] uppercase tracking-wider text-slate-300 border-none shrink-0 ml-2">
-              {item.rarity}
-            </Badge>
-          </div>
-          
-          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-700/50 pt-4">
-            <div>
-              <p className="text-[10px] uppercase text-slate-400 font-bold tracking-widest">Value</p>
-              <p className="text-lg font-bold text-slate-200">{item.value}</p>
-            </div>
-            <div>
-              <p className="text-[10px] uppercase text-slate-400 font-bold tracking-widest">Demand</p>
-              <p className="text-lg font-bold text-slate-200">{item.demand}/10</p>
-            </div>
-          </div>
-        </div>
+        
+        {/* ... rest of your card ... */}
+        <div className="p-4 text-white">TESTING ANIMATION</div>
       </Card>
     </div>
   );

@@ -25,20 +25,25 @@ export function ItemCard({ item }: ItemCardProps) {
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-800 border border-slate-700 shadow-xl flex flex-col overflow-hidden">
         
-        {/* Rarity Bar: Animated Rainbow for Shiny, Solid Color for others */}
+        {/* Animated Rainbow Bar or Solid Rarity Bar */}
         <div 
-          className="h-2 w-full"
+          className={`h-2 w-full ${!isShiny ? barColor : ""}`}
           style={isShiny ? {
             background: 'linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee, #ff0000)',
             backgroundSize: '200% 100%',
             animation: 'rainbow 3s linear infinite'
-          } : { backgroundColor: 'var(--bar-color, #475569)' }} // Fallback color
-          className={!isShiny ? `h-2 w-full ${barColor}` : "h-2 w-full"}
+          } : {}}
         />
 
-        {/* Item Image */}
+        {/* Item Image with Outline */}
         <div className="p-6 bg-slate-850 flex items-center justify-center h-40">
-          <img src={item.image} alt={item.name} className="max-w-[80%] max-h-[80%] object-contain drop-shadow-md" />
+          <div className="border border-slate-600 rounded-lg p-1 bg-slate-900/50">
+            <img 
+              src={item.image} 
+              alt={item.name} 
+              className="max-w-[120px] max-h-[120px] object-contain" 
+            />
+          </div>
         </div>
 
         {/* Details */}

@@ -8,19 +8,21 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  // 1. Check if the item is shiny (based on your data)
+  // Logic to determine if item is shiny
   const isShiny = item.isShiny === true || (item.name && item.name.toLowerCase().includes("shiny"));
 
   return (
     <div className="w-[280px] transition-all hover:scale-[1.02]">
       <Card className="h-full bg-slate-800 border border-slate-700 shadow-xl flex flex-col overflow-hidden">
         
-        {/* Only show the rainbow bar IF the item is shiny */}
+        {/* Animated Rainbow Bar */}
         {isShiny && (
           <div 
             className="h-2 w-full"
             style={{
-              background: 'linear-gradient(to right, #ff0000, #ff8000, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee)'
+              background: 'linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee, #ff0000)',
+              backgroundSize: '200% 100%',
+              animation: 'rainbow 3s linear infinite'
             }}
           />
         )}
@@ -41,7 +43,7 @@ export function ItemCard({ item }: ItemCardProps) {
           </h3>
           
           <div className="flex items-center justify-between mt-2">
-            {/* Conditional Shiny Badge */}
+            {/* Conditional Badge */}
             <Badge className={`${isShiny ? "bg-slate-900 border border-slate-600 text-slate-300" : "bg-slate-900 border border-slate-700 text-slate-500"}`}>
               {isShiny ? "SHINY " + item.rarity.toUpperCase() : item.rarity.toUpperCase()}
             </Badge>

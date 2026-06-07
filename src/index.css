@@ -12,20 +12,16 @@
   --color-foreground: hsl(0 0% 95%);
   --color-muted-foreground: hsl(220 10% 60%);
 
-  /* Define animation here so Tailwind v4 registers it */
+  /* Animation Definition */
   --animate-shine: shine 3s linear infinite;
-
   @keyframes shine {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 
 @layer base {
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/20;
-    background-image: radial-gradient(circle at 50% -20%, hsl(215 100% 70% / 0.06), transparent 70%);
+    @apply bg-background text-foreground antialiased;
   }
-  * { @apply border-border; }
-  h1, h2, h3, h4 { @apply text-foreground font-bold tracking-tight; }
 }

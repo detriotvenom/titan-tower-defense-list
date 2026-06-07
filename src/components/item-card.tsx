@@ -1,98 +1,40 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { TrendingDown, TrendingUp } from "lucide-react";
 import type { Item } from "@/lib/items-store";
 
 interface ItemCardProps {
   item: Item;
 }
 
-const RARITY_MAP: Record<string, string> = {
-  secret: "bg-purple-600",
-  mythic: "bg-rose-500",
-  legendary: "bg-amber-500",
-  epic: "bg-blue-500",
-  item: "bg-slate-500",
-};
-
-const getRarityStyles = (item: Item) => {
-  if (item.isShiny) {
-    // We return a base background class, the animation class, and an inline style object
-    return "bg-slate-700 animate-shine";
-  }
-  return RARITY_MAP[item.rarity.toLowerCase()] || "bg-slate-500";
-};
-
 export function ItemCard({ item }: ItemCardProps) {
-  const rarityStyle = getRarityStyles(item);
-  
-  // Define the shining gradient effect as an inline style to guarantee it renders
-  const shinyStyle = item.isShiny ? {
-    backgroundImage: "linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%)",
-    backgroundSize: "200% 100%",
-  } : {};
+  // Define colors as a simple object to avoid logic errors
+  const rarityColors: Record<string, string> = {
+    secret: "bg-purple-600",
+    mythic: "bg-rose-500",
+    legendary: "bg-amber-500",
+    epic: "bg-blue-500",
+  };
+
+  const barColor = rarityColors[item.rarity.toLowerCase()] || "bg-slate-500";
 
   return (
-    <div className="group relative w-[280px] p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all hover:scale-[1.02] duration-300">
-      <Card className="h-full bg-card/80 backdrop-blur-md border-none shadow-2xl flex flex-col overflow-hidden">
-        
-        {/* Dynamic Color Bar */}
-        <div 
-          className={`h-1.5 w-full ${rarityStyle}`} 
-          style={shinyStyle}
-        />
+    <div className="w-[280px] rounded-2xl bg-card border border-border overflow-hidden shadow-lg">
+      {/* Static Rarity Bar - No complex animations to ensure it renders */}
+      <div className={`h-1.5 w-full ${barColor}`} />
 
-        <div className="relative w-full h-40 bg-black/20 flex items-center justify-center overflow-hidden">
-          <img 
-            src={item.image} 
-            alt={item.name} 
-            className="max-w-[70%] max-h-[70%] object-contain transition-transform duration-500 group-hover:scale-110"
-          />
-        </div>
+      <div className="p-4 bg-black/20 flex items-center justify-center h-40">
+        <img src={item.image} alt={item.name} className="max-w-[70%] max-h-[70%] object-contain" />
+      </div>
 
-        <div className="p-5 flex flex-col flex-1">
-          <div className="flex justify-between items-start mb-4">
-            <h3 className="font-bold text-lg text-foreground leading-tight">{item.name}</h3>
-            <Badge variant="outline" className="text-[10px] uppercase tracking-widest border-white/10 bg-white/5 text-foreground/80 shrink-0">
-              {item.rarity}
-            </Badge>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
-            <div>
-              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-1">Value</p>
-              <p className="text-lg font-black text-white tabular-nums">{item.value}</p>
-            </div>
-            <div>
-              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-1">UTTV</p>
-              <p className="text-lg font-bold text-foreground tabular-nums">{item.uttv}</p>
-            </div>
-          </div>
+      <div className="p-4">
+        <h3 className="font-bold text-lg">{item.name}</h3>
+        <p className="text-sm text-muted-foreground">{item.rarity}</p>
+        <div className="mt-4 pt-4 border-t border-border">
+          <p className="text-xs font-bold uppercase text-muted-foreground">Value</p>
+          <p className="text-xl font-black">{item.value}</p>
         </div>
-
-        <div className="grid grid-cols-2 bg-white/[0.03] border-t border-white/5">
-          <div className="px-4 py-3 border-r border-white/5">
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-0.5">Demand</p>
-            <p className={`font-black text-sm tabular-nums ${item.demand >= 7 ? 'text-emerald-400' : 'text-amber-400'}`}>
-              {item.demand.toFixed(1)}/10
-            </p>
-          </div>
-          <div className="px-4 py-3 flex flex-col justify-center">
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-0.5">Stability</p>
-            <div className="flex items-center gap-1">
-              {item.stability === "Stable" ? (
-                <TrendingUp className="w-3 h-3 text-emerald-400" />
-              ) : (
-                <TrendingDown className="w-3 h-3 text-rose-400" />
-              )}
-              <span className={`text-[11px] font-bold ${item.stability === "Stable" ? 'text-emerald-400' : 'text-rose-400'}`}>
-                {item.stability}
-              </span>
-            </div>
-          </div>
-        </div>
-      </Card>
+      </div>
     </div>
   );
 }
